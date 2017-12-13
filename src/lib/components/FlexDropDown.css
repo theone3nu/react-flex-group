@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.dropdown input {
+    min-height: 20px;
+    font-size: inherit;
+}
+.dropdownList {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownList li {
+  min-height: 20px;
+  padding: 10px;
+  flex: 1;
+}
+
+.inputArrow {
+  display: flex;
+  align-items: center;
+}
+
+.inputArrow input {
+  flex: 1;
+}
+.dropdownList li:hover {
+  background-color: lightgray;
+}
+
+.selected {
+  background-color: darkgray;
+}
