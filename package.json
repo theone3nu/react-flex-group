@@ -1,5 +1,5 @@
 {
-  "name": "ReactFlexDropdown",
+  "name": "react-flex-dropdown",
   "version": "1.0.0",
   "description": "React dropdown with keyboard handlers and manual search",
   "main": "build/index.js",

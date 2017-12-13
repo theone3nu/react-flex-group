@@ -5,19 +5,7 @@ import './FlexDropDown.css';
 class FlexDropDown extends Component {
   constructor(props) {
     super(props);
-    const data = [
-      'Testssssssssssssssstttttt',
-      'Trinu',
-      'Uttam',
-      'Chiranjeevi',
-      'Prabhakar',
-      'Saaksshi',
-      'Trinu1',
-      'Rob',
-      'Paul',
-      'Zebra'
-    ];
-    this.state = { showDropdown: false, data, filteredData: data, selectedText: '' };
+    this.state = { showDropdown: false, data: props.data, filteredData: props.data, selectedText: '' };
     this.onFocusOut = this.onFocusOut.bind(this);
   }
 
@@ -171,4 +159,7 @@ class FlexDropDown extends Component {
   }
 }
 
+FlexDropDown.defaultProps = {
+  data: []
+}
 export default FlexDropDown;
