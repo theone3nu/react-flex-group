@@ -6,10 +6,9 @@ class FlexDropDown extends Component {
   constructor(props) {
     super(props);
     this.state = { showDropdown: false, data: props.data, filteredData: props.data, selectedText: '' };
-    this.onFocusOut = this.onFocusOut.bind(this);
   }
 
-  onFocusOut(e) {
+  onFocusOut = e => {
     if (!ReactDOM.findDOMNode(this).contains(e.target)) {
       if (this.state.showDropdown) {
         this.setState({ showDropdown: false, active: false });
@@ -41,6 +40,7 @@ class FlexDropDown extends Component {
 
   onItemSelect = e => {
     this.setState({ showDropdown: false, selectedText: e.target.textContent });
+    this.props.onItemSelect(e.target.textContent);
   };
 
   onFocus = e => {
@@ -162,4 +162,5 @@ class FlexDropDown extends Component {
 FlexDropDown.defaultProps = {
   data: []
 }
+
 export default FlexDropDown;
