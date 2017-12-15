@@ -147,11 +147,12 @@ class FlexDropDown extends Component {
             ref={input => {
               this.dropdownInput = input;
             }}
+            placeholder="Select"
             disabled={!this.props.editable}
             onChange={this.onInputChange}
             value={this.state.selectedText}
           />
-          <p onClick={() => this.setState({ showDropdown: !this.state.showDropdown })}>C</p>
+          <span className={this.state.showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'} onClick={() => this.setState({ showDropdown: !this.state.showDropdown })}></span>
         </div>
         {this.state.showDropdown && this.renderList()}
       </div>
