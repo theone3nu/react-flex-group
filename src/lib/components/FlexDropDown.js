@@ -18,7 +18,7 @@ class FlexDropDown extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', this.onFocusOut);
+    document.addEventListener('mousedown', this.onFocusOut);
   }
 
   componentDidUpdate() {
@@ -112,7 +112,7 @@ class FlexDropDown extends Component {
 	}
 
   componentWillUnmount() {
-    window.removeEventListener('click', this.onFocusOut);
+    document.removeEventListener('mousedown', this.onFocusOut);
   }
 
   renderList() {

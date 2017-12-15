@@ -12,6 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/theone3nu/react-flex-dropdown.git"
   },
+  "keywords": [
+    "react flex dropdown",
+    "react dropdown",
+    "react combobox",
+    "react select",
+    "react customdropdown"
+  ],
   "author": "Thrinethra Siddani <mytu3nu@gmail.com>",
   "bugs": {
     "url": "https://github.com/theone3nu/react-flex-dropdown/issues"
