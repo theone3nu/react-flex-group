@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import './FlexDropDown.css';
 
 class FlexDropDown extends Component {
@@ -166,7 +167,11 @@ class FlexDropDown extends Component {
 }
 
 FlexDropDown.defaultProps = {
-  data: []
+  data: [],
+  editable: false
 };
-
+FlexDropDown.proptypes = {
+  onItemSelect: PropTypes.func.isRequired,
+  data: PropTypes.array
+};
 export default FlexDropDown;
