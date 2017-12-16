@@ -6,11 +6,21 @@
 
 ## Usage
 ```
-import FlexDropdown from 'react-flex-drodown';
+import React from 'react';
+import FlexDropdown from 'react-flex-dropdown';
 
-const data = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
+const onItemSelect = (value) => {
+    console.log(value);
+}
 
-<FlexDropdown data={data} editable={true} onItemSelect={onItemSelect}/>
+const App = () => {
+        const data = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
+        return <div>
+            <FlexDropdown data={data} editable={true} onItemSelect={onItemSelect}/>
+        </div>
+}
+export default App;
+
 
 ```
 
