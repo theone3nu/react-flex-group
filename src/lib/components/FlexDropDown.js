@@ -15,7 +15,7 @@ class FlexDropDown extends Component {
         ReactDOM.findDOMNode(this).removeEventListener('keydown', this.keyDownHandler);
       }
     }
-  }
+  };
 
   componentDidMount() {
     document.addEventListener('mousedown', this.onFocusOut);
@@ -31,9 +31,7 @@ class FlexDropDown extends Component {
     if (e.target.value === '') {
       this.setState({ showDropdown: false, selectedText: '', filteredData: this.state.data });
     } else {
-      const filteredData = this.state.data.filter(
-        item => item.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
-      );
+      const filteredData = this.state.data.filter(item => item.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1);
       this.setState({ showDropdown: true, filteredData, selectedText: e.target.value });
     }
   };
@@ -53,11 +51,18 @@ class FlexDropDown extends Component {
     if (this.state.filteredData.length === 0) {
       return;
     }
-    if (e.keyCode === 40) {
-      const selectedIndex = this.state.filteredData.findIndex(
-        item => item.toLowerCase() === this.state.selectedText.toLowerCase()
-      );
-      this.setState({ showDropdown: true});
+    if (e.keyCode === 13) {
+      const selectedIndex = this.state.filteredData.findIndex(item => item.toLowerCase() === this.state.selectedText.toLowerCase());
+      if (selectedIndex === -1) {
+        return;
+      } else {
+        this.props.onItemSelect(this.state.selectedText);
+        this.setState({ showDropdown: false });
+        return;
+      }
+    } else if (e.keyCode === 40) {
+      const selectedIndex = this.state.filteredData.findIndex(item => item.toLowerCase() === this.state.selectedText.toLowerCase());
+      this.setState({ showDropdown: true });
       if (selectedIndex === -1) {
         this.setState({ selectedText: this.state.filteredData[0] });
         return;
@@ -68,10 +73,8 @@ class FlexDropDown extends Component {
         this.setState({ selectedText: this.state.filteredData[selectedIndex] });
       }
     } else if (e.keyCode === 38) {
-      const selectedIndex = this.state.filteredData.findIndex(
-        item => item.toLowerCase() === this.state.selectedText.toLowerCase()
-      );
-			this.setState({ showDropdown: true});
+      const selectedIndex = this.state.filteredData.findIndex(item => item.toLowerCase() === this.state.selectedText.toLowerCase());
+      this.setState({ showDropdown: true });
       if (selectedIndex === -1) {
         this.setState({ selectedText: this.state.filteredData[0] });
         return;
@@ -82,34 +85,33 @@ class FlexDropDown extends Component {
         this.setState({ selectedText: this.state.filteredData[selectedIndex] });
       }
     }
-    if(this.selectedLi) {
+    if (this.selectedLi) {
       const isVisible = this.isElementInViewport(ReactDOM.findDOMNode(this.selectedLi));
-      if(!isVisible) {
-				ReactDOM.findDOMNode(this.selectedLi).scrollIntoView();
+      if (!isVisible) {
+        ReactDOM.findDOMNode(this.selectedLi).scrollIntoView();
       }
-		}
+    }
   };
 
-	isElementInViewport (el) {
+  isElementInViewport(el) {
+    var rect = el.getBoundingClientRect(),
+      vWidth = window.innerWidth || document.documentElement.clientWidth,
+      vHeight = window.innerHeight || document.documentElement.clientHeight,
+      efp = function(x, y) {
+        return document.elementFromPoint(x, y);
+      };
 
-		var rect     = el.getBoundingClientRect(),
-			vWidth   = window.innerWidth || document.documentElement.clientWidth,
-			vHeight  = window.innerHeight || document.documentElement.clientHeight,
-			efp      = function (x, y) { return document.elementFromPoint(x, y) };
+    // Return false if it's not in the viewport
+    if (rect.right < 0 || rect.bottom < 0 || rect.left > vWidth || rect.top > vHeight) return false;
 
-		// Return false if it's not in the viewport
-		if (rect.right < 0 || rect.bottom < 0
-			|| rect.left > vWidth || rect.top > vHeight)
-			return false;
-
-		// Return true if any of its four corners are visible
-		return (
-			el.contains(efp(rect.left,  rect.top))
-			||  el.contains(efp(rect.right, rect.top))
-			||  el.contains(efp(rect.right, rect.bottom))
-			||  el.contains(efp(rect.left,  rect.bottom))
-		);
-	}
+    // Return true if any of its four corners are visible
+    return (
+      el.contains(efp(rect.left, rect.top)) ||
+      el.contains(efp(rect.right, rect.top)) ||
+      el.contains(efp(rect.right, rect.bottom)) ||
+      el.contains(efp(rect.left, rect.bottom))
+    );
+  }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.onFocusOut);
@@ -152,7 +154,10 @@ class FlexDropDown extends Component {
             onChange={this.onInputChange}
             value={this.state.selectedText}
           />
-          <span className={this.state.showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'} onClick={() => this.setState({ showDropdown: !this.state.showDropdown })}></span>
+          <span
+            className={this.state.showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'}
+            onClick={() => this.setState({ showDropdown: !this.state.showDropdown })}
+          />
         </div>
         {this.state.showDropdown && this.renderList()}
       </div>
@@ -162,6 +167,6 @@ class FlexDropDown extends Component {
 
 FlexDropDown.defaultProps = {
   data: []
-}
+};
 
 export default FlexDropDown;
