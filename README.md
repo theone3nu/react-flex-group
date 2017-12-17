@@ -16,7 +16,7 @@ const onItemSelect = (value) => {
 const App = () => {
         const data = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
         return <div>
-            <FlexDropdown data={data} editable={true} onItemSelect={onItemSelect}/>
+            <FlexDropdown data={data} editable={true} placeholder='Choose' onItemSelect={onItemSelect}/>
         </div>
 }
 export default App;

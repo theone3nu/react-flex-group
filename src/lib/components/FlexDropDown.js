@@ -49,41 +49,42 @@ class FlexDropDown extends Component {
   };
 
   keyDownHandler = e => {
-    if (this.state.filteredData.length === 0) {
+    const { filteredData, selectedText } = this.state;
+    if (filteredData.length === 0) {
       return;
     }
     if (e.keyCode === 13) {
-      const selectedIndex = this.state.filteredData.findIndex(item => item.toLowerCase() === this.state.selectedText.toLowerCase());
+      const selectedIndex = filteredData.findIndex(item => item.toLowerCase() === selectedText.toLowerCase());
       if (selectedIndex === -1) {
         return;
       } else {
-        this.props.onItemSelect(this.state.selectedText);
+        this.props.onItemSelect(selectedText);
         this.setState({ showDropdown: false });
         return;
       }
     } else if (e.keyCode === 40) {
-      const selectedIndex = this.state.filteredData.findIndex(item => item.toLowerCase() === this.state.selectedText.toLowerCase());
+      const selectedIndex = filteredData.findIndex(item => item.toLowerCase() === selectedText.toLowerCase());
       this.setState({ showDropdown: true });
       if (selectedIndex === -1) {
-        this.setState({ selectedText: this.state.filteredData[0] });
+        this.setState({ selectedText: filteredData[0] });
         return;
       }
-      if (selectedIndex !== this.state.filteredData.length - 1) {
-        this.setState({ selectedText: this.state.filteredData[selectedIndex + 1] });
+      if (selectedIndex !== filteredData.length - 1) {
+        this.setState({ selectedText: filteredData[selectedIndex + 1] });
       } else {
-        this.setState({ selectedText: this.state.filteredData[selectedIndex] });
+        this.setState({ selectedText: filteredData[selectedIndex] });
       }
     } else if (e.keyCode === 38) {
-      const selectedIndex = this.state.filteredData.findIndex(item => item.toLowerCase() === this.state.selectedText.toLowerCase());
+      const selectedIndex = filteredData.findIndex(item => item.toLowerCase() === selectedText.toLowerCase());
       this.setState({ showDropdown: true });
       if (selectedIndex === -1) {
-        this.setState({ selectedText: this.state.filteredData[0] });
+        this.setState({ selectedText: filteredData[0] });
         return;
       }
       if (selectedIndex !== 0) {
-        this.setState({ selectedText: this.state.filteredData[selectedIndex - 1] });
+        this.setState({ selectedText: filteredData[selectedIndex - 1] });
       } else {
-        this.setState({ selectedText: this.state.filteredData[selectedIndex] });
+        this.setState({ selectedText: filteredData[selectedIndex] });
       }
     }
     if (this.selectedLi) {
@@ -119,10 +120,11 @@ class FlexDropDown extends Component {
   }
 
   renderList() {
+    const { filteredData, selectedText } = this.state;
     return (
       <ul className="dropdownList">
-        {this.state.filteredData.map((item, i) => {
-          const selected = item === this.state.selectedText ? 'selected' : '';
+        {filteredData.map((item, i) => {
+          const selected = item === selectedText ? 'selected' : '';
           return (
             <li
               key={i}
@@ -143,7 +145,8 @@ class FlexDropDown extends Component {
   }
 
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, editable } = this.props;
+    const { selectedText, showDropdown } = this.state;
     return (
       <div className="dropdown" onClick={this.onFocus} tabIndex="0">
         <div className="inputArrow">
@@ -152,16 +155,16 @@ class FlexDropDown extends Component {
               this.dropdownInput = input;
             }}
             placeholder={placeholder}
-            disabled={!this.props.editable}
+            disabled={!editable}
             onChange={this.onInputChange}
-            value={this.state.selectedText}
+            value={selectedText}
           />
           <span
-            className={this.state.showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'}
-            onClick={() => this.setState({ showDropdown: !this.state.showDropdown })}
+            className={showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'}
+            onClick={() => this.setState({ showDropdown: !showDropdown })}
           />
         </div>
-        {this.state.showDropdown && this.renderList()}
+        {showDropdown && this.renderList()}
       </div>
     );
   }
