@@ -143,6 +143,7 @@ class FlexDropDown extends Component {
   }
 
   render() {
+    const { placeholder } = this.props;
     return (
       <div className="dropdown" onClick={this.onFocus} tabIndex="0">
         <div className="inputArrow">
@@ -150,7 +151,7 @@ class FlexDropDown extends Component {
             ref={input => {
               this.dropdownInput = input;
             }}
-            placeholder="Select"
+            placeholder={placeholder}
             disabled={!this.props.editable}
             onChange={this.onInputChange}
             value={this.state.selectedText}
@@ -168,7 +169,8 @@ class FlexDropDown extends Component {
 
 FlexDropDown.defaultProps = {
   data: [],
-  editable: false
+  editable: false,
+  placeholder: 'Select'
 };
 FlexDropDown.proptypes = {
   onItemSelect: PropTypes.func.isRequired,
