@@ -6,7 +6,16 @@ import './FlexDropDown.css';
 class FlexDropDown extends Component {
   constructor(props) {
     super(props);
-    this.state = { showDropdown: false, data: props.data, filteredData: props.data, selectedText: '' };
+    const data = props.data.map(item => {
+      if(!item.value) {
+        return {
+          label: item,
+          value: item
+        }
+      }
+      return item;
+    })
+    this.state = { showDropdown: false, data, filteredData: data, selectedItem: '', selectedText: '' };
   }
 
   onFocusOut = e => {
@@ -30,16 +39,16 @@ class FlexDropDown extends Component {
 
   onInputChange = e => {
     if (e.target.value === '') {
-      this.setState({ showDropdown: false, selectedText: '', filteredData: this.state.data });
+      this.setState({ showDropdown: false, selectedItem: '', filteredData: this.state.data, selectedText: '' });
     } else {
-      const filteredData = this.state.data.filter(item => item.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1);
+      const filteredData = this.state.data.filter(item => item.label.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1);
       this.setState({ showDropdown: true, filteredData, selectedText: e.target.value });
     }
   };
 
-  onItemSelect = e => {
-    this.setState({ showDropdown: false, selectedText: e.target.textContent });
-    this.props.onItemSelect(e.target.textContent);
+  onItemSelect(item) {
+    this.setState({ showDropdown: false, selectedText: item.label });
+    this.props.onItemSelect(item.value);
   };
 
   onFocus = e => {
@@ -54,37 +63,38 @@ class FlexDropDown extends Component {
       return;
     }
     if (e.keyCode === 13) {
-      const selectedIndex = filteredData.findIndex(item => item.toLowerCase() === selectedText.toLowerCase());
+      const selectedIndex = filteredData.findIndex(item => item.label.toLowerCase() === selectedText.toLowerCase());
+      const selectedItem = filteredData.find(item => item.label.toLowerCase() === selectedText.toLowerCase());
       if (selectedIndex === -1) {
         return;
       } else {
-        this.props.onItemSelect(selectedText);
-        this.setState({ showDropdown: false });
+        this.props.onItemSelect(selectedItem.value);
+        this.setState({ showDropdown: false, selectedText: selectedItem.label });
         return;
       }
     } else if (e.keyCode === 40) {
-      const selectedIndex = filteredData.findIndex(item => item.toLowerCase() === selectedText.toLowerCase());
+      const selectedIndex = filteredData.findIndex(item => item.label.toLowerCase() === selectedText.toLowerCase());
       this.setState({ showDropdown: true });
       if (selectedIndex === -1) {
-        this.setState({ selectedText: filteredData[0] });
+        this.setState({ selectedText: filteredData[0].label });
         return;
       }
       if (selectedIndex !== filteredData.length - 1) {
-        this.setState({ selectedText: filteredData[selectedIndex + 1] });
+        this.setState({ selectedText: filteredData[selectedIndex + 1].label, selectedItem: filteredData[selectedIndex + 1] });
       } else {
-        this.setState({ selectedText: filteredData[selectedIndex] });
+        this.setState({ selectedText: filteredData[selectedIndex].label, selectedItem: filteredData[selectedIndex] });
       }
     } else if (e.keyCode === 38) {
-      const selectedIndex = filteredData.findIndex(item => item.toLowerCase() === selectedText.toLowerCase());
+      const selectedIndex = filteredData.findIndex(item => item.label.toLowerCase() === selectedText.toLowerCase());
       this.setState({ showDropdown: true });
       if (selectedIndex === -1) {
-        this.setState({ selectedText: filteredData[0] });
+        this.setState({ selectedText: filteredData[0].label, selectedItem: filteredData[0] });
         return;
       }
       if (selectedIndex !== 0) {
-        this.setState({ selectedText: filteredData[selectedIndex - 1] });
+        this.setState({ selectedText:filteredData[selectedIndex -1].label, selectedItem: filteredData[selectedIndex - 1] });
       } else {
-        this.setState({ selectedText: filteredData[selectedIndex] });
+        this.setState({ selectedText: filteredData[selectedIndex].label, selectedItem: filteredData[selectedIndex] });
       }
     }
     if (this.selectedLi) {
@@ -124,19 +134,19 @@ class FlexDropDown extends Component {
     return (
       <ul className="dropdownList">
         {filteredData.map((item, i) => {
-          const selected = item === selectedText ? 'selected' : '';
+          const selected = item.label === selectedText ? 'selected' : '';
           return (
             <li
-              key={i}
+              key={item.value}
               ref={li => {
                 if (selected) {
                   this.selectedLi = li;
                 }
               }}
-              onClick={this.onItemSelect}
+              onClick={() => this.onItemSelect(item)}
               className={selected}
             >
-              {item}
+              {item.label}
             </li>
           );
         })}
