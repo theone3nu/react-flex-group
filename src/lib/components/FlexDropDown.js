@@ -183,10 +183,11 @@ class FlexDropDown extends Component {
 FlexDropDown.defaultProps = {
   data: [],
   editable: false,
-  placeholder: 'Select'
+  placeholder: 'Select',
+  onItemSelect: () => {}
 };
 FlexDropDown.proptypes = {
-  onItemSelect: PropTypes.func.isRequired,
+  onItemSelect: PropTypes.func,
   data: PropTypes.array
 };
 export default FlexDropDown;
