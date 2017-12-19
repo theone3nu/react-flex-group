@@ -7,14 +7,14 @@ class FlexDropDown extends Component {
   constructor(props) {
     super(props);
     const data = props.data.map(item => {
-      if(!item.value) {
+      if (!item.value) {
         return {
           label: item,
           value: item
-        }
+        };
       }
       return item;
-    })
+    });
     this.state = { showDropdown: false, data, filteredData: data, selectedItem: '', selectedText: '' };
   }
 
@@ -38,18 +38,19 @@ class FlexDropDown extends Component {
   }
 
   onInputChange = e => {
-    if (e.target.value === '') {
-      this.setState({ showDropdown: false, selectedItem: '', filteredData: this.state.data, selectedText: '' });
+    const selectedText = e.target.value;
+    if (selectedText === '') {
+      this.setState({ showDropdown: false, selectedItem: '', filteredData: this.state.data, selectedText });
     } else {
-      const filteredData = this.state.data.filter(item => item.label.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1);
-      this.setState({ showDropdown: true, filteredData, selectedText: e.target.value });
+      const filteredData = this.state.data.filter(item => item.label.toLowerCase().indexOf(selectedText.toLowerCase()) !== -1);
+      this.setState({ showDropdown: true, filteredData, selectedText });
     }
   };
 
   onItemSelect(item) {
     this.setState({ showDropdown: false, selectedText: item.label });
     this.props.onItemSelect(item.value);
-  };
+  }
 
   onFocus = e => {
     ReactDOM.findDOMNode(this).removeEventListener('keydown', this.keyDownHandler);
@@ -92,7 +93,7 @@ class FlexDropDown extends Component {
         return;
       }
       if (selectedIndex !== 0) {
-        this.setState({ selectedText:filteredData[selectedIndex -1].label, selectedItem: filteredData[selectedIndex - 1] });
+        this.setState({ selectedText: filteredData[selectedIndex - 1].label, selectedItem: filteredData[selectedIndex - 1] });
       } else {
         this.setState({ selectedText: filteredData[selectedIndex].label, selectedItem: filteredData[selectedIndex] });
       }
@@ -134,7 +135,7 @@ class FlexDropDown extends Component {
     return (
       <ul className="dropdownList">
         {filteredData.map((item, i) => {
-          const selected = item.label === selectedText ? 'selected' : '';
+          const selected = item.label.toLowerCase() === selectedText.toLowerCase() ? 'selected' : '';
           return (
             <li
               key={item.value}
@@ -169,10 +170,7 @@ class FlexDropDown extends Component {
             onChange={this.onInputChange}
             value={selectedText}
           />
-          <span
-            className={showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'}
-            onClick={() => this.setState({ showDropdown: !showDropdown })}
-          />
+          <span className={showDropdown ? 'dropdown-arrow-open' : 'dropdown-arrow-close'} onClick={() => this.setState({ showDropdown: !showDropdown })} />
         </div>
         {showDropdown && this.renderList()}
       </div>
