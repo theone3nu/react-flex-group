@@ -1,7 +1,7 @@
 {
-  "name": "react-flex-dropdown",
-  "version": "1.1.6",
-  "description": "React dropdown with keyboard handlers and manual search",
+  "name": "react-flex-group",
+  "version": "0.0.1",
+  "description": "React absolute layout container",
   "main": "build/index.js",
   "scripts": {
     "start": "node scripts/start.js",
@@ -10,18 +10,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theone3nu/react-flex-dropdown.git"
+    "url": "git+https://github.com/theone3nu/react-flex-group.git"
   },
   "keywords": [
-    "react flex dropdown",
-    "react dropdown",
-    "react combobox",
-    "react select",
-    "react customdropdown"
+    "react flex group",
+    "react absolute layout container",
+    "react group",
+    "flex group",
+    "react absolute container",
+    "absolute component",
+    "absolute container",
+    "react layout container",
+    "react layout"
   ],
   "author": "Thrinethra Siddani <mytu3nu@gmail.com>",
   "bugs": {
-    "url": "https://github.com/theone3nu/react-flex-dropdown/issues"
+    "url": "https://github.com/theone3nu/react-flex-group/issues"
   },
   "homepage": "https://github.com/theone3nu/react-flex-dropdown/#readme",
   "license": "MIT",
