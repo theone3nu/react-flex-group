@@ -1,6 +1,5 @@
 import React from 'react';
 import Group from '../lib';
-import '../lib/components/Group.css';
 const App = () => {
   const style1 = { background: 'red', width: '100%' };
   const style2 = { background: 'blue', width: '100%', height: '100%' };
