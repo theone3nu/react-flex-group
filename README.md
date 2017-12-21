@@ -7,28 +7,25 @@
 ## Usage
 ```
 import React from 'react';
-import Group from 'react-flex-dropdown';
-
-const onItemSelect = (value) => {
-    console.log(value);
-}
-
-const data = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
-            or
-const data = [
-              {label: 'Item1', value: 'item1'},
-              {label: 'Item2', value:'item2'},
-              {label:'Item3', value:'item3'},
-              {label:'Item4', value:'item4'},
-              {label:'Item5', value:'item5'}
-              ];
-
+import Group from '../lib';
+import '../lib/components/Group.css';
 const App = () => {
-        return <div>
-            <FlexDropdown data={data} editable={true} placeholder='Choose' onItemSelect={onItemSelect}/>
-        </div>
-}
+  const style1 = { background: 'red', width: '100%' };
+  const style2 = { background: 'blue', width: '100%', height: '100%' };
+  return (
+    <Group>
+      <div data-left="0px" style={style1}>
+        1
+      </div>
+      <div data-left="250px" data-top="100px" style={style2}>
+        2
+      </div>
+    </Group>
+  );
+};
 export default App;
+
+
 
 
 ```

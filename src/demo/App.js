@@ -2,14 +2,14 @@ import React from 'react';
 import Group from '../lib';
 import '../lib/components/Group.css';
 const App = () => {
-  const style1 = { width: '100%' };
-  const style2 = { width: '100%', height: '100%' };
+  const style1 = { background: 'red', width: '100%' };
+  const style2 = { background: 'blue', width: '100%', height: '100%' };
   return (
     <Group>
-      <div className="box1" data-left="0px" style={style1}>
+      <div data-left="0px" style={style1}>
         1
       </div>
-      <div className="box2" data-left="250px" data-bottom="100px">
+      <div data-left="250px" data-top="100px" style={style2}>
         2
       </div>
     </Group>
