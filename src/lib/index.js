@@ -1,3 +1,3 @@
-import FlexDropdown from './components/FlexDropDown';
+import Group from './components/Group';
 
-export default FlexDropdown;
+export default Group;

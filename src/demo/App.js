@@ -1,23 +1,18 @@
 import React from 'react';
-import FlexDropdown from '../lib';
-
-const onItemSelect = value => {
-  console.log(value);
-};
-
+import Group from '../lib';
+import '../lib/components/Group.css';
 const App = () => {
-  // const data = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
-  const data = [
-    { label: 'Item1', value: 'item1' },
-    { label: 'Item2', value: 'item2' },
-    { label: 'Item3', value: 'item3' },
-    { label: 'Item4', value: 'item4' },
-    { label: 'Item5', value: 'item5' }
-  ];
+  const style1 = { width: '100%' };
+  const style2 = { width: '100%', height: '100%' };
   return (
-    <div>
-      <FlexDropdown data={data} editable={true} onItemSelect={onItemSelect} placeholder="Choose" />
-    </div>
+    <Group>
+      <div className="box1" data-left="0px" style={style1}>
+        1
+      </div>
+      <div className="box2" data-left="250px" data-bottom="100px">
+        2
+      </div>
+    </Group>
   );
 };
 export default App;

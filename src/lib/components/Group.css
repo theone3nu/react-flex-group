@@ -1,0 +1,22 @@
+.groupMain {
+  position: relative;
+  width: stretch;
+  height: stretch;
+  border: 1px solid;
+}
+
+.groupChild {
+  position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.box1 {
+    background: red;
+}
+
+.box2 {
+    background: blue;
+}

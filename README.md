@@ -1,13 +1,13 @@
-# React Dropdown with keyboard handlers. Press down and up arrows to select. Manually type to filter the items.
+# React absolute layout container that aligns the child elements using top left bottom right values.
 
 ## Install
 
-`npm install react-flex-dropdown --save`
+`npm install react-flex-group --save`
 
 ## Usage
 ```
 import React from 'react';
-import FlexDropdown from 'react-flex-dropdown';
+import Group from 'react-flex-dropdown';
 
 const onItemSelect = (value) => {
     console.log(value);
