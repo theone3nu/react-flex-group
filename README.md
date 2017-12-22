@@ -4,6 +4,12 @@
 
 `npm install react-flex-group --save`
 
+## How to use
+## Inspired from Apache flex spark group component.
+By default width and height of group container is 100% so adjust width and height of child elements with respect to the parent container ##
+#Width and height of child elements depends on the width you have given. It doesn't depends on the content.##
+
+
 ## Usage
 ```
 import React from 'react';

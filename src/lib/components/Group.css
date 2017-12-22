@@ -1,14 +1,18 @@
 .groupMain {
   position: relative;
+  width: -webkit-stretch;
+  width: -moz-available;
   width: stretch;
+  height: -webkit-stretch;
+  height: -moz-available;
   height: stretch;
   border: 1px solid;
 }
 
 .groupChild {
   position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
